@@ -77,7 +77,7 @@ RUN apt -y update \
  && chmod 600 /home/docker/.vnc/passwd \
  && chown -R 1000:1000 /home/docker/.vnc \
  && echo 'tint2 &' >>/etc/xdg/openbox/autostart \
- && wget http://download.slicer.org/bitstream/1338641 -O slicer.tar.gz \
+ && wget http://download.slicer.org/bitstream/1337228 -O slicer.tar.gz \
  && tar xzf slicer.tar.gz -C /tmp \
  && mv /tmp/Slicer*/* /opt/slicer/ \
  && rm slicer.tar.gz \
