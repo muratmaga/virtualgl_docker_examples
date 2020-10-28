@@ -61,6 +61,7 @@ RUN apt -y update \
     x11-xkb-utils \
     x11-xserver-utils \
     xauth \
+    pcmanfm \
  && wget https://s3.amazonaws.com/turbovnc-pr/dev/linux/turbovnc_2.2.80_amd64.deb \
  && wget https://s3.amazonaws.com/virtualgl-pr/dev/linux/virtualgl_2.6.80_amd64.deb \
  && wget https://s3.amazonaws.com/virtualgl-pr/dev/linux/virtualgl32_2.6.80_amd64.deb \
