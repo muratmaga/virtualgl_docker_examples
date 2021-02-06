@@ -89,6 +89,30 @@ RUN apt -y update \
  && rm -rf /tmp/* \
  && rm -rf /var/tmp/*
 
+#
+# install SlicerMorph extensions
+#
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb
+
+RUN \
+  su docker -c "xvfb-run --auto-servernum \
+    /opt/slicer/Slicer --python-code pip_install\(\'pandas\'\)\;exit\(\)"
+
+COPY install-slicer-extension.py /tmp
+
+RUN \
+export SLICER_MORPH_EXTS="MarkupsToModel Auto3dgm SegmentEditorExtraEffects Sandbox SlicerIGT RawImageGuess SlicerDcm2nii SurfaceWrapSolidify SlicerMorph" ; \
+echo installing ${SLICER_MORPH_EXTS} ; \
+for ext in ${SLICER_MORPH_EXTS} ; \
+do echo "Installing ${ext}" ; \
+  EXTENSION_TO_INSTALL=${ext} \
+    su docker -c "xvfb-run --auto-servernum \
+      /opt/slicer/Slicer --python-script /tmp/install-slicer-extension.py" ; \
+done
+### End of SlicerMorph extensions
+
+
 RUN LNUM=$(sed -n '/launcher_item_app/=' /etc/tint2/panel.tint2rc | head -1) && \
   sed -i "${LNUM}ilauncher_item_app = /opt/slicer/slicer.desktop" /etc/tint2/panel.tint2rc
 
