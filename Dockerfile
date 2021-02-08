@@ -11,7 +11,7 @@ RUN chmod 755 /etc/tint2 \
  && chmod 644 /etc/tint2/*
 COPY opt /opt
 RUN chmod 755 /opt \
- && chmod 755 /opt/slicer \
+ && chmod 777 /opt/slicer \
  && chmod 644 /opt/slicer/*
 COPY usr/local /usr/local
 RUN chmod 755 /usr/local \
